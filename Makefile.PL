@@ -3,14 +3,14 @@ require 5.006;
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
+  'PL_FILES' => {},
+  'INSTALLDIRS' => 'site',
   'NAME' => 'Catalyst::Plugin::Compress::WithExclusions',
+  'EXE_FILES' => [],
   'VERSION_FROM' => 'lib/Catalyst/Plugin/Compress/WithExclusions.pm',
   'PREREQ_PM' => {
-                   'Catalyst::Plugin::Compress' => undef,
-                   'Test::More' => 0
-                 },
-  'INSTALLDIRS' => 'site',
-  'EXE_FILES' => [],
-  'PL_FILES' => {}
+                   'Test::More' => 0,
+                   'Catalyst::Plugin::Compress' => '0.005'
+                 }
 )
 ;

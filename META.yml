@@ -16,10 +16,10 @@ name: Catalyst-Plugin-Compress-WithExclusions
 provides:
   Catalyst::Plugin::Compress::WithExclusions:
     file: lib/Catalyst/Plugin/Compress/WithExclusions.pm
-    version: 0.01
+    version: 0.02
 requires:
-  Catalyst::Plugin::Compress: 0
+  Catalyst::Plugin::Compress: 0.005
   perl: 5.006
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.01
+version: 0.02

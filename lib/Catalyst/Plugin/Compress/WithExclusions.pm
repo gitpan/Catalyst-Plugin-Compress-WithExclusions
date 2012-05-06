@@ -10,15 +10,13 @@ Catalyst::Plugin::Compress::WithExclusions - Compresses all responses from the s
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
-my @excluded = (
-  '^download',
-);
+my @excluded = ();
 
 =head1 SYNOPSIS
 
@@ -32,9 +30,33 @@ and the compression format that you want to use.
       compression_format => $format
     );
 
-Accepted formats are the same as defined in L<Catalyst::Plugin::Compress>
+Accepted formats for $format are the same as defined in L<Catalyst::Plugin::Compress>
 
+=head1 DESCRIPTION
+
+It is always a good idea to compress the results that are returned from
+your web application, if the client can handle it. L<Catalyst::Plugin::Compress>
+does that for you with very little effort. However, there are times when you might
+not want the reponse to be compressed. For example when a returning a file that has
+already been zipped. The extra compression is unlikely to reduce the file size and
+will just add extra load to the server. This module builds upon the
+L<Catalyst::Plugin::Compress> module and adds the option to skip the compression step
+for certain url paths. So, for example, if you dont want to compress any files in the
+download path, then you would add the following to your config:
+
+    __PACKAGE__->config(
+      compression_excluded => ['^download', ],
+    );
+
+Now all urls on the site that start with download will be uncompressed and everything
+else will be compressed as requested.
+ 
 =head1 SUBROUTINES/METHODS
+
+=head2 setup
+
+This is an internal method. It checks to see if any exclusions have been
+added in the configuration file.
 
 =cut
 
@@ -56,7 +78,7 @@ sub setup {
 
 =head2 should_compress_response
 
-This is an internal method that fisrt checks to see if the path should be excluded
+This is an internal method that first checks to see if the path should be excluded
 from compression and then passes on to the parent for further checks.
 
 =cut
